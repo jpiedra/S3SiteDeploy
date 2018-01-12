@@ -1,5 +1,6 @@
 # AWS S3 Bucket Static Site deployment
 _"Anything that is to stupid to be done (manually) is automated" - jpiedra, 2018_
+
 Series of commands (and eventual script) to automate creation, file upload and configuration of an S3 bucket for use as a static website.
 
 # Assumptions
