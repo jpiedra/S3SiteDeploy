@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # [https://docs.aws.amazon.com/cli/latest/reference/s3/mb.html] :: create the bucket 
-aws s3 mb s3://acme.com --region us-east-1
+aws s3 mb s3://diab-test.acme.com --region us-east-1
 
 # [https://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-policy.html] :: configure the bucket's policy
 # [https://docs.aws.amazon.com/AmazonS3/latest/dev/HostingWebsiteOnS3Setup.html#step2-add-bucket-policy-make-content-public] :: basic policy for a static website

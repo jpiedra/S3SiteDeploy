@@ -17,6 +17,17 @@ $results = aws s3 ls s3://$($Name) 2>&1
 if ($results | Select-String -Pattern "NoSuchBucket") {
     # if the bucket doesn't already exist, create it and prepare accordingly...
     Write-Host "Creating new bucket s3://$($Name)"
+    # aws s3 ls s3://fake.org 2>&1 | % { $_ | gm }
+    <#
+        try {
+            $result = aws s3 ls s3://fake.org 2>&1
+            if ($result[0].GetType().Name -eq "ErrorRecord") {
+                throw "Bucket not found"
+            }
+        } catch {
+            
+        }
+    #>
     $bucket = aws s3 mb s3://$($Name) --region $($Region) 2>&1
     
     # if your bucket was created successfully, proceed to configure/upload defaults
