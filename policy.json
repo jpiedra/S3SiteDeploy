@@ -5,7 +5,7 @@
          "Effect":"Allow",
  	  "Principal": "*",
        "Action":["s3:GetObject"],
-       "Resource":["arn:aws:s3:::fake17.diabolis.net/*"
+       "Resource":["arn:aws:s3:::fake12334.org/*"
        ]
      }
    ]
