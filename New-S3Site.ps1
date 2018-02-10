@@ -13,10 +13,11 @@ Param(
 
 $bucketName = "s3://$($Name)"
 
-# make sure the bucket doesn't already exist, checking for an ErrorRecord
+# make sure the bucket doesn't already exist, checking for a blank result or an ErrorRecord
 try {
     $result = aws s3 ls $bucketName 2>&1
-    if ($result[0].GetType().Name -ne "ErrorRecord") {
+    # if listing succeeds, then $result will be $null because there was nothing passed from stderr
+    if ($result -eq $null -or $result[0].GetType().Name -ne "ErrorRecord") {
         throw [System.Exception]::new("The specified bucket $bucketName already exists.");
     }
 } catch {
