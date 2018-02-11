@@ -26,5 +26,5 @@ aws s3 cp . s3://$($Name) --exclude "*" --include "*.png" --recursive --metadata
 aws s3 cp . s3://$($Name) --exclude "*" --include "*.jpg" --recursive --metadata-directive REPLACE `
     --content-type image/jpg --cache-control public,max-age=604800
 
-
+# Set the website configuration for the bucket, setting the index and error pages.
 aws s3 website s3://$($Name) --index-document index.html --error-document error.html
