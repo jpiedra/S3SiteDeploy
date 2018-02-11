@@ -5,10 +5,9 @@ Param(
     [String]
     $Name,
 
-    # The region the bucket should reside in
-    [Parameter(Mandatory=$false)]
+    # Name of the path on the local computer to copy files from, assume current working directory by default
     [String]
-    $Region="us-east-1"
+    $Path = $pwd.Path
 )
 
 $bucketName = "s3://$($Name)"
@@ -26,7 +25,7 @@ try {
     Exit
 } 
 
-$bucket = aws s3 mb $bucketName --region $($Region) 2>&1
+$bucket = aws s3 mb $bucketName 2>&1
 
 # if your bucket was created successfully, proceed to configure/upload defaults
 if ($bucket | Select-String -Pattern "make_bucket") {
@@ -36,6 +35,6 @@ if ($bucket | Select-String -Pattern "make_bucket") {
         # upload your site contents
         write-host (Get-Content "policy.json")
         aws s3api put-bucket-policy --bucket $Name --policy file://policy.json
-        .\Upload-S3Site.ps1 -Name $Name
+        .\Upload-S3Site.ps1 -Name $Name -Path $Path
     }
 }
