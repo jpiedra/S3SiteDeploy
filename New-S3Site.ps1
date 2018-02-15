@@ -7,7 +7,11 @@ Param(
 
     # Name of the path on the local computer to copy files from, assume current working directory by default
     [String]
-    $Path = $pwd.Path
+    $Path = $pwd.Path,
+
+    # Name of the error file, used to handle 404 requests on the static site
+    [String]
+    $ErrorFile = 'error.html'
 )
 
 $bucketName = "s3://$($Name)"
@@ -35,6 +39,6 @@ if ($bucket | Select-String -Pattern "make_bucket") {
         # upload your site contents
         write-host (Get-Content "policy.json")
         aws s3api put-bucket-policy --bucket $Name --policy file://policy.json
-        .\Upload-S3Site.ps1 -Name $Name -Path $Path
+        .\Upload-S3Site.ps1 -Name $Name -Path $Path -ErrorFile $ErrorFile
     }
 }

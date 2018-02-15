@@ -7,7 +7,11 @@ Param(
 
     # Name of the path on the local computer to copy files from, assume current working directory by default
     [String]
-    $Path = $pwd.Path
+    $Path = $pwd.Path,
+
+    # Name of the error file, used to handle 404 requests on the static site
+    [String]
+    $ErrorFile = 'error.html'
 )
 
 # [https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html] :: upload boilerplate files
@@ -31,4 +35,4 @@ aws s3 cp $Path s3://$($Name) --exclude "*" --include "*.jpg" --recursive --meta
     --content-type image/jpg --cache-control public,max-age=604800
 
 # Set the website configuration for the bucket, setting the index and error pages.
-aws s3 website s3://$($Name) --index-document index.html --error-document error.html
+aws s3 website s3://$($Name) --index-document index.html --error-document $ErrorFile
