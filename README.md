@@ -8,7 +8,7 @@ More info on that here: https://docs.aws.amazon.com/cli/latest/userguide/tutoria
 
 # Directions
 The file _deploy.sh_ contains all commands to be run manually. Run them individually, or all at once (Linux and Mac). 
-If you'd like to create a bucket that isn't using some random test name of _acme.com_ replace that with the REAL name of your bucket. 
+Replace occurences of _acme.com_ with the name of the S3 bucket you're deploying to. 
 
 Powershell Users: A script _New-S3Site.ps1_ is available for use, which handles creating a bucket (first checking if it's there), adding some assets from an example web project (handled by _Upload-S3Site.ps1_), and preparing the bucket for use as a website (applying a default policy, running 'website' command, etc.)
 
